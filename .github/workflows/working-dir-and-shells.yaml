@@ -1,0 +1,33 @@
+name: Working Directory and Shells
+on: [push]
+defaults:
+    run:
+        shell: bash
+        # working-directory: c:/Courses/gh-actions-course-udemy
+jobs:
+    display-wd-info:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Display Working Directory and List Files
+              run: |
+                pwd
+                ls -a
+                echo $GITHUB_SHA
+                echo $GITHUB_REPOSITORY
+                echo $GITHUB_WORKSPACE
+            - name: Change Working Directory
+              working-directory: /home/runner
+              run: pwd
+    display-wd-info-windows:
+        runs-on: windows-latest
+        defaults:
+            run:
+                shell: pwsh
+        steps:
+            - name: Display Working Directory and List Files
+              run: |
+                Get-Location
+                dir
+                echo $env:GITHUB_SHA
+                echo $env:GITHUB_REPOSITORY
+                echo $env:GITHUB_WORKSPACE
